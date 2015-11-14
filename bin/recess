@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var recess = require('../lib')
+  , util   = require('../lib/util')
   , watch  = require('watch')
   , nopt   = require('nopt')
   , path   = require('path')
@@ -62,7 +63,15 @@ options.cli = true
 
 
 // if not watch - run Recess
-if (!options.watch) return recess(paths, options)
+if (!options.watch) return recess(paths, options, function (err, instances) {
+  var hasError = !!err;
+  instances.forEach(function (instance) {
+    if (util.countErrors(instance.definitions)) {
+      hasError = true;
+    }
+  });
+  process.exit(+hasError);
+})
 
 // if options watch, but compile isn't set - make it happen
 if (options.watch && !options.compile && !options.compress) options.compile = true;
