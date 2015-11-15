@@ -1,6 +1,6 @@
 { "name": "recess-jairaj"
 , "description": "A simple, attractive code quality tool for CSS built on top of LESS"
-, "version": "1.1.9"
+, "version": "1.1.10"
 , "author": "Jacob Thornton <jacob@twitter.com> (https://github.com/fat)"
 , "repository": { "type": "git", "url": "git://github.com/jairajs89/recess.git" }
 , "keywords": ["css", "lint"]

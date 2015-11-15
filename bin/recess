@@ -56,6 +56,14 @@ if (options.config || (fs.existsSync || path.existsSync)(config)) {
   config = JSON.parse(fs.readFileSync(options.config || config))
   for (i in options) config[i] = options[i]
   options = config
+} else {
+  var packageOptions;
+  try {
+    packageOptions = JSON.parse(fs.readFileSync(process.cwd()+'/package.json'))['recessConfig'];
+  } catch (err) {}
+  if (packageOptions && typeof packageOptions === 'object') {
+    options = packageOptions;
+  }
 }
 
 // set CLI to true
